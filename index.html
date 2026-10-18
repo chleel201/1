@@ -161,6 +161,25 @@
 .ios-avatar {
   font-size: 0 !important;
 }
+
+/* 전화 및 메시지 프로필 */
+.ios-row .avatar {
+  width: 49px;
+  height: 49px;
+  flex-shrink: 0;
+  border-radius: 50% !important;
+  overflow: hidden;
+  background: transparent !important;
+  background-image: none !important;
+}
+
+.ios-row .default-profile {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  border-radius: 50%;
+}
 </style></head><body><main class="phone"><div class="island"></div><div class="status"><span>21:47</span><span>●●● ▰</span></div>
 <section id="lock" class="screen active" style="cursor:pointer;touch-action:manipulation" onclick="reset();show('pass')"><div class="lock-date">10월 18일 일요일</div><div class="lock-time">21:47</div><div class="unlock">화면을 터치하여 잠금 해제</div><div class="bottom"><div class="round">♜</div><div class="round">◎</div></div><div class="bar"></div></section>
 <section id="pass" class="screen"><div class="pass-title">암호 입력</div><div class="dots" id="dots"></div><div class="pad" id="pad"></div><div class="error" id="error"></div><button class="cancel" onclick="reset();show('lock')">취소</button><div class="bar"></div></section>
@@ -182,6 +201,12 @@ function phonePage(){return `${pageHead('통화')}<div style="height:12px"></div
 const orderedMessages=[messages[6],...messages.filter((_,i)=>i!==6)];
 function messagePage(){return `<div class="ios-head"><button onclick="goHome()">편집</button><span></span><button>☷</button></div><div class="ios-title">메시지</div>${orderedMessages.map(([name,msg,time],i)=>`<div class="ios-row">${[0,2,3,4,5,6].includes(i)?'<div class="msg-dot"></div>':'<div style="width:9px"></div>'}
 
+
+<div class="avatar">
+  <img src="icons/default-profile.png"
+       class="default-profile"
+       alt="프로필">
+</div>
 <div class="ios-info"><div class="ios-name">${name}</div><div class="message-body">${msg}</div></div><div class="ios-right">${time} ❯</div></div>`).join('')}<div class="ios-tabs"><span class="searchbox" style="margin:0;flex:1">⌕ 검색</span><button>▣</button></div>`}
 function naverPage(){return `<div class="naver"><div style="padding:8px 19px;font-size:19px;font-weight:700">☰　ⓟ <span style="float:right">♧</span></div><div class="naver-search"><b style="font-size:27px;color:#7550e8">N</b><input id="naverinput" placeholder="검색어 또는 URL 입력" onkeydown="if(event.key==='Enter')naverSearch()"><button style="border:0;background:none;color:#03c77b;font-size:25px" onclick="naverSearch()">⌕</button></div><div class="naver-body"><h3>최근 검색어 <span style="float:right;font-size:13px;color:#999;font-weight:400;cursor:pointer" onclick="this.closest('.naver-body').querySelector('.recents').innerHTML=''">전체삭제</span></h3><div class="recents">${recent.map((term,i)=>`<div class="searchitem" onclick="document.getElementById('naverinput').value='${term}'"><span style="color:#aaa">◷</span>${term}<small>10.${17+i*2}.　×</small></div>`).join('')}</div></div></div>`}
 
